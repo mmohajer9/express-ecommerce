@@ -1,10 +1,19 @@
 const express = require('express');
 const path = require('path');
+const mongoose = require('mongoose');
+
+// Connect to MongoDB
+mongoose.connect('mongodb://127.0.0.1:27017/merchant', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+
+// Global Config
+global.config = require(path.join(__dirname, './src/common/config'));
 
 const webRouter = require(path.join(__dirname, './src/routes/web'));
 const apiRouter = require(path.join(__dirname, './src/routes/api'));
-
-global.config = require(path.join(__dirname, './src/common/config'));
 
 const app = express();
 
