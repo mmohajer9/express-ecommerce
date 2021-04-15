@@ -1,0 +1,14 @@
+{
+  "name": "merchant-ecommerce",
+  "version": "1.0.0",
+  "description": "merchant e-commerce platform",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "express-generator": "^4.16.1"
+  }
+}
