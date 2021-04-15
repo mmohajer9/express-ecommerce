@@ -19,6 +19,8 @@ const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json({ type: 'application/json' }));
+
+// URL Prefixes
 app.use('/', webRouter);
 app.use('/api', apiRouter);
 

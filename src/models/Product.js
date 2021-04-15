@@ -8,7 +8,8 @@ const ProductSchema = new Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
   image: { type: String, required: true },
-  orderItem: [{ type: Schema.Types.ObjectId, ref: 'OrderItem' }],
+  category: { type: Schema.Types.ObjectId, ref: 'Category' },
+  orderItems: [{ type: Schema.Types.ObjectId, ref: 'OrderItem' }],
 
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
