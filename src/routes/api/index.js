@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const apiV1 = require(path.join(__dirname, './api.v1'));
+const apiV1 = require('./api.v1');
 
 const router = express.Router();
 

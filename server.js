@@ -8,15 +8,17 @@ mongoose.connect('mongodb://127.0.0.1:27017/merchant', {
   useUnifiedTopology: true,
 });
 
-
 // Global Config
-global.config = require(path.join(__dirname, './src/common/config'));
+global.config = require('./src/common/config');
 
-const webRouter = require(path.join(__dirname, './src/routes/web'));
-const apiRouter = require(path.join(__dirname, './src/routes/api'));
+// Routers
+const webRouter = require('./src/routes/web');
+const apiRouter = require('./src/routes/api');
 
+// Express Application Instance
 const app = express();
 
+// Request Body Middlewares
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json({ type: 'application/json' }));
 
@@ -24,6 +26,7 @@ app.use(express.json({ type: 'application/json' }));
 app.use('/', webRouter);
 app.use('/api', apiRouter);
 
+// Event-Loop
 app.listen(config.port, config.hostname, () => {
   console.log(
     `Server is running at ${config.protocol}${config.hostname}:${config.port}`
