@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Making User Schema
-const UserSchema = new Schema({
+const userSchema = new Schema({
   firstName: {
     type: String,
     required: true,
@@ -33,4 +33,4 @@ const UserSchema = new Schema({
 
 // Creating The Model and Collection -> Also Export
 // By default , collection name is the name of the model + 's' -> users in here
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', userSchema);

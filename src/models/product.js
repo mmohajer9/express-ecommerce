@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Making Product Schema
-const ProductSchema = new Schema({
+const productSchema = new Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
   image: { type: String, required: true },
@@ -16,4 +16,4 @@ const ProductSchema = new Schema({
 });
 
 // Creating The Model and Collection -> Also Export
-module.exports = mongoose.model('Product', ProductSchema);
+module.exports = mongoose.model('Product', productSchema);

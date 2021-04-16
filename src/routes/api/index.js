@@ -1,5 +1,5 @@
 const express = require('express');
-const apiV1 = require('./api.v1');
+const apiV1 = require('./v1');
 
 const router = express.Router();
 

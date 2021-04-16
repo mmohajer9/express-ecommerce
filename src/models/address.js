@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Making Address Schema
-const AddressSchema = new Schema({
+const addressSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   orders: [{ type: Schema.Types.ObjectId, ref: 'Order' }],
 
@@ -13,4 +13,4 @@ const AddressSchema = new Schema({
 });
 
 // Creating The Model and Collection -> Also Export
-module.exports = mongoose.model('Order', AddressSchema);
+module.exports = mongoose.model('Order', addressSchema);

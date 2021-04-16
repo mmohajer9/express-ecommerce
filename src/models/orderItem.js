@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Making OrderItem Schema
-const OrderItemSchema = new Schema({
+const orderItemSchema = new Schema({
   order: { type: Schema.Types.ObjectId, ref: 'Order' },
   product: { type: Schema.Types.ObjectId, ref: 'Product' },
   quantity: { type: Number, required: true },
@@ -14,4 +14,4 @@ const OrderItemSchema = new Schema({
 });
 
 // Creating The Model and Collection -> Also Export
-module.exports = mongoose.model('OrderItem', OrderItemSchema);
+module.exports = mongoose.model('OrderItem', orderItemSchema);

@@ -28,6 +28,6 @@ app.use('/api', apiRouter);
 // Event-Loop
 app.listen(config.port, config.hostname, () => {
   console.log(
-    `Server is running at ${config.protocol}${config.hostname}:${config.port}`
+    `Server is running at ${config.scheme}${config.hostname}:${config.port}`
   );
 });
