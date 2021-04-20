@@ -6,7 +6,7 @@ const { api: apiControllerPath } = config.path.controller.v1;
 
 const authController = require(path.join(apiControllerPath, '/authController'));
 
-router.get('/', authController.index);
-router.get('/version', authController.version);
+router.post('/register', authController.register);
+router.post('/login', authController.login);
 
 module.exports = router;

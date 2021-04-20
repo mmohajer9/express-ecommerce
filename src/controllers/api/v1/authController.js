@@ -1,10 +1,14 @@
-class AuthController {
-  index(req, res) {
-    res.status(200).json({ message: 'This is api.v1 auth controller' });
+const Controller = require('./base/Controller');
+
+class AuthController extends Controller {
+  register(req, res) {
+    // Validation - Sanitize
+    // Show Errors
+    // Actions
   }
 
-  version(req, res) {
-    res.json({ version: 1 });
+  login(req, res) {
+    res.json('login');
   }
 }
 

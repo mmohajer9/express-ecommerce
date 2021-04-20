@@ -13,4 +13,4 @@ const addressSchema = new Schema({
 });
 
 // Creating The Model and Collection -> Also Export
-module.exports = mongoose.model('Order', addressSchema);
+module.exports = mongoose.model('Address', addressSchema);
