@@ -1,10 +1,10 @@
 const express = require('express');
 const homeRouter = require('./home');
-const mainRouter = require('./main');
+const authRouter = require('./auth');
 const router = express.Router();
 
 // URL Versioning
 router.use('/', homeRouter);
-router.use('/main', mainRouter);
+router.use('/auth', authRouter);
 
 module.exports = router;

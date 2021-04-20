@@ -4,9 +4,9 @@ const path = require('path');
 
 const { api: apiControllerPath } = config.path.controller.v1;
 
-const MainController = require(path.join(apiControllerPath, '/MainController'));
+const authController = require(path.join(apiControllerPath, '/authController'));
 
-router.get('/', MainController.index);
-router.get('/version', MainController.version);
+router.get('/', authController.index);
+router.get('/version', authController.version);
 
 module.exports = router;
