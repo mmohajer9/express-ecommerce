@@ -4,7 +4,7 @@ const path = require('path');
 
 const { api: apiControllerPath } = config.path.controller.v1;
 
-const homeController = require(path.join(apiControllerPath, '/homeController'));
+const homeController = require(path.join(apiControllerPath, '/home/homeController'));
 
 router.get('/', homeController.index);
 router.get('/version', homeController.version);

@@ -13,16 +13,22 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   email: {
     type: String,
     required: true,
+    unique: true,
   },
   password: {
     type: String,
     required: true,
   },
-  profileImage: { type: String, required: true },
-
+  profileImage: { type: String, required: false },
+  isAdmin: { type: Boolean, default: false },
   // similar to foreign keys -> ref : model_name
   orders: [{ type: Schema.Types.ObjectId, ref: 'Order' }],
   addresses: [{ type: Schema.Types.ObjectId, ref: 'Address' }],
