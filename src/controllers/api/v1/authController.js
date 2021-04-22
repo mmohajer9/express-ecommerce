@@ -1,7 +1,11 @@
 const Controller = require('./base/Controller');
 
 class AuthController extends Controller {
-  
+  validators = {
+    register: [],
+    login: [],
+  };
+
   register(req, res) {
     // Validation - Sanitize
     // Show Errors

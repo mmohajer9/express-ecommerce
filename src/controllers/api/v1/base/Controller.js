@@ -17,7 +17,7 @@ class Controller {
   }
 
   // * validators (array of middlewares) - order matters
-  validators = [];
+  validators = {};
 
   // * models for later references to them
   model = {
