@@ -1,12 +1,6 @@
 const express = require('express');
-const mongoose = require('mongoose');
-
-// Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/merchant', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-});
+const helmet = require('helmet');
+const compression = require('compression');
 
 // Global Config
 global.config = require('./src/common/config');
@@ -17,6 +11,10 @@ const apiRouter = require('./src/routes/api');
 
 // Express Application Instance
 const app = express();
+
+// Security and Performance Middlewares
+app.use(helmet());
+app.use(compression());
 
 // Request Body Middlewares
 app.use(express.urlencoded({ extended: false }));

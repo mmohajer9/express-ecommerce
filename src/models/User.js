@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 // Schema Creator Class
 const Schema = mongoose.Schema;
@@ -39,4 +40,14 @@ const userSchema = new Schema({
 
 // Creating The Model and Collection -> Also Export
 // By default , collection name is the name of the model + 's' -> users in here
+
+userSchema.pre('save', function (next) {
+  if (this.password) {
+    bcrypt.hash(this.password, 10, (err, hash) => {
+      this.password = hash;
+      next();
+    });
+  }
+});
+
 module.exports = mongoose.model('User', userSchema);

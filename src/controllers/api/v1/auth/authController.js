@@ -1,6 +1,7 @@
 const path = require('path');
 
 const { models: modelsPath } = config.path;
+var mongoose = require('mongoose');
 
 const Controller = require('../base/Controller');
 const User = require(path.join(modelsPath, '/User'));
@@ -12,22 +13,24 @@ class AuthController extends Controller {
 
   register(req, res) {
     // Actions
+    const user = new this.models.User({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+    });
 
-    this.models
-      .User({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password,
-      })
-      .save((err) => {
-        if (err) {
-          res.status(406).json(err);
-        } else {
-          res.status(201).json({ msg: 'user has been created successfully' });
-        }
-      });
+    user.save((err, user) => {
+      if (err) {
+        res.status(406).json(err);
+      } else {
+        res.status(201).json({
+          msg: 'user has been created successfully',
+          success: true,
+        });
+      }
+    });
   }
 
   login(req, res) {
