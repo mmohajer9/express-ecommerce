@@ -1,5 +1,4 @@
 const path = require('path');
-const { body, validationResult } = require('express-validator');
 
 const { models: modelsPath } = config.path;
 
@@ -14,17 +13,21 @@ const User = require(path.join(modelsPath, '/User'));
 // Base Controller
 class Controller {
   constructor() {
-    this.model = {
-      Address,
-      Category,
-      Order,
-      OrderItem,
-      Product,
-      User,
-    };
-
     this.bindMethods();
   }
+
+  // * validators (array of middlewares) - order matters
+  validators = [];
+
+  // * models for later references to them
+  model = {
+    Address,
+    Category,
+    Order,
+    OrderItem,
+    Product,
+    User,
+  };
 
   bindMethods() {
     Object.getOwnPropertyNames(Object.getPrototypeOf(this)).map((key) => {
@@ -33,12 +36,12 @@ class Controller {
     });
   }
 
-  //* single item - override this for your custom outputs
+  // * single item - override this for your custom outputs
   transform(item) {
     return item;
   }
 
-  //* multiple items
+  // * multiple items
   transformCollection(items) {
     return items.map(this.transform);
   }
