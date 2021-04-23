@@ -1,7 +1,7 @@
 {
-  "name": "merchant-ecommerce",
+  "name": "express-ecommerce",
   "version": "1.0.0",
-  "description": "merchant e-commerce platform",
+  "description": "e-commerce platform with node/express.js",
   "main": "server.js",
   "scripts": {
     "start": "clear;nodemon server.js"
