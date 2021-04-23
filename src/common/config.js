@@ -1,18 +1,23 @@
 const path = require('path');
 const mongoose = require('mongoose');
+const chalk = require('chalk');
 
 // Connect to MongoDB
 const db = mongoose.connect('mongodb://127.0.0.1:27017/merchant', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
-})
+});
 
-mongoose.set('debug', { shell: true });
+// mongoose.set('debug', { shell: true });
 
 const conn = mongoose.connection;
-conn.on('error', () => console.error('Mongoose : Connection refused'));
-conn.once('open', () => console.log('Mongoose : Connected to the database'));
+conn.on('error', () =>
+  console.error(chalk.redBright('Mongoose : Connection refused'))
+);
+conn.once('open', () =>
+  console.log(chalk.greenBright('Mongoose : Connected to the database'))
+);
 
 // Global Export
 module.exports = {

@@ -1,6 +1,7 @@
 const express = require('express');
 const helmet = require('helmet');
 const compression = require('compression');
+const chalk = require('chalk');
 
 // Global Config
 global.config = require('./src/common/config');
@@ -27,6 +28,8 @@ app.use('/api', apiRouter);
 // Event-Loop
 app.listen(config.port, config.hostname, () => {
   console.log(
-    `Server is running at ${config.scheme}${config.hostname}:${config.port}`
+    chalk.blueBright(
+      `Server is running at ${config.scheme}${config.hostname}:${config.port}`
+    )
   );
 });
