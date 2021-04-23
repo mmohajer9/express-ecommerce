@@ -47,12 +47,15 @@ class AuthController extends Controller {
 
   loginTransform(item) {
     return {
-      firstName: item.firstName,
-      lastName: item.lastName,
-      username: item.username,
-      _id: item._id,
-      email: item.email,
-      isAdmin: item.isAdmin,
+      data: {
+        firstName: item.firstName,
+        lastName: item.lastName,
+        username: item.username,
+        _id: item._id,
+        email: item.email,
+        isAdmin: item.isAdmin,
+      },
+      success: true,
     };
   }
 
