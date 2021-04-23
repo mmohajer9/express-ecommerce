@@ -67,11 +67,11 @@ class AuthController extends Controller {
 
   createJWT(item) {
     const payload = {
+      _id: item._id,
+      username: item.username,
+      email: item.email,
       firstName: item.firstName,
       lastName: item.lastName,
-      username: item.username,
-      _id: item._id,
-      email: item.email,
       isAdmin: item.isAdmin,
     };
     const secret = config.secret;

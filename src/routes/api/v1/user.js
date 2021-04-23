@@ -10,6 +10,15 @@ const { imageUpload } = require(path.join(
   '/uploadMiddleware'
 ));
 
+const addressController = require(path.join(
+  apiControllerPath,
+  '/address/addressController'
+));
+const addressValidator = require(path.join(
+  apiControllerPath,
+  '/address/addressValidator'
+));
+
 const userController = require(path.join(
   apiControllerPath,
   '/user/userController'
@@ -25,10 +34,12 @@ router
   .get(userValidator.isAuthenticatedJWT, userController.detail)
   .put(
     userValidator.isAuthenticatedJWT,
+    userValidator.isOwner,
     userValidator.validators.update,
     userValidator.validationResult,
     imageUpload.single('profileImage'),
     userController.update
   );
+router.route('/:username/addresses').get().post();
 
 module.exports = router;

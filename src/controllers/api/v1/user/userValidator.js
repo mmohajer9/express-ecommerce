@@ -16,6 +16,19 @@ class UserValidator extends Validator {
       body('email').optional().isEmail().normalizeEmail(),
     ],
   };
+
+  isOwner(req, res, next) {
+    const { username: targetUsername } = req.params;
+    const { username } = req.user;
+    if (username === targetUsername) {
+      next();
+    } else {
+      res.status(403).json({
+        msg: 'You are not allowed to do this action',
+        success: false,
+      });
+    }
+  }
 }
 
 module.exports = new UserValidator();
