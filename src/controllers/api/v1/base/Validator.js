@@ -1,4 +1,5 @@
 const { validationResult } = require('express-validator');
+const checkJWT = require('express-jwt');
 
 // Base Validator
 class Validator {
@@ -8,6 +9,12 @@ class Validator {
 
   // * models for later references to them
   models = {};
+
+  // * JWT Protected Middleware
+  isAuthenticatedJWT = checkJWT({
+    secret: config.secret,
+    algorithms: ['HS256'],
+  });
 
   // * input validation
   validators = {};

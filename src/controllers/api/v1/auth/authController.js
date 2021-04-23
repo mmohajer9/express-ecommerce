@@ -1,5 +1,7 @@
 const path = require('path');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 const { models: modelsPath } = config.path;
 
 const Controller = require('../base/Controller');
@@ -46,6 +48,8 @@ class AuthController extends Controller {
   }
 
   loginTransform(item) {
+    const token = this.createJWT(item);
+
     return {
       data: {
         firstName: item.firstName,
@@ -54,9 +58,27 @@ class AuthController extends Controller {
         _id: item._id,
         email: item.email,
         isAdmin: item.isAdmin,
+        profileImage: item.profileImage,
       },
       success: true,
+      token: token,
     };
+  }
+
+  createJWT(item) {
+    const payload = {
+      firstName: item.firstName,
+      lastName: item.lastName,
+      username: item.username,
+      _id: item._id,
+      email: item.email,
+      isAdmin: item.isAdmin,
+    };
+    const secret = config.secret;
+    const options = { expiresIn: '2h' };
+    const token = jwt.sign(payload, secret, options);
+
+    return token;
   }
 
   async login(req, res) {

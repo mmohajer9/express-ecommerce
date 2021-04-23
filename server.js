@@ -20,7 +20,7 @@ app.use(compression());
 // Request Body Middlewares
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json({ type: 'application/json' }));
-
+app.use('/public', express.static('public'));
 // URL Prefixes
 app.use('/', webRouter);
 app.use('/api', apiRouter);

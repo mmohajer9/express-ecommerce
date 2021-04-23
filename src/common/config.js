@@ -7,6 +7,7 @@ const db = mongoose.connect('mongodb://127.0.0.1:27017/merchant', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
+  useFindAndModify: false,
 });
 
 // mongoose.set('debug', { shell: true });
@@ -21,11 +22,12 @@ conn.once('open', () =>
 
 // Global Export
 module.exports = {
+  secret: 'm946_t1sr4#!m6ngfi6le@mtn-hbcmhd7q9&x#kuktq$7t$tv_',
   scheme: 'http://',
   hostname: 'localhost',
   port: 8000,
   path: {
-    controller: {
+    controllers: {
       v1: {
         // path.resolve will look for resolving from the cwd (current working directory)
         // that is the location which server.js has been called
@@ -34,5 +36,6 @@ module.exports = {
       },
     },
     models: path.resolve('src', 'models'),
+    middlewares: path.resolve('src', 'middlewares'),
   },
 };

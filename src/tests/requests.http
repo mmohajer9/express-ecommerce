@@ -1,0 +1,7 @@
+GET /api/v1/users/ HTTP/1.1
+User-Agent: vscode-restclient
+Host: localhost:8000
+Content-Length: 371
+
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmaXJzdE5hbWUiOiJtYW1hZCIsImxhc3ROYW1lIjoibW9oYWplciIsInVzZXJuYW1lIjoibW1vaGFqZXI5IiwiX2lkIjoiNjA4MWU1ZTA5ZTQ1NDEwY2Q1NTIzZDBkIiwiZW1haWwiOiJtbW9oYWplcjk4QGdtYWlsLmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2MTkxOTA0MTcsImV4cCI6MTYxOTE5NzYxN30.KP-DziWFuyYZR8uUKNmz1f3o5Ek7UaxbPuQg4JH8x70

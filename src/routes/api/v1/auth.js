@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 
-const { api: apiControllerPath } = config.path.controller.v1;
+const { api: apiControllerPath } = config.path.controllers.v1;
 
 const authController = require(path.join(apiControllerPath, '/auth/authController'));
 const authValidator = require(path.join(apiControllerPath, '/auth/authValidator'));
