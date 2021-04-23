@@ -1,7 +1,6 @@
 const path = require('path');
-
+const bcrypt = require('bcrypt');
 const { models: modelsPath } = config.path;
-var mongoose = require('mongoose');
 
 const Controller = require('../base/Controller');
 const User = require(path.join(modelsPath, '/User'));
@@ -33,9 +32,38 @@ class AuthController extends Controller {
     });
   }
 
-  login(req, res) {
-    console.log(this);
-    res.json('login');
+  async authenticate(username, password) {
+    try {
+      const user = await this.models.User.findOne({
+        username: username,
+      });
+      const same = await bcrypt.compare(password, user.password);
+
+      return same ? user : null;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  loginTransform(item) {
+    return {
+      firstName: item.firstName,
+      lastName: item.lastName,
+      username: item.username,
+      _id: item._id,
+      email: item.email,
+      isAdmin: item.isAdmin,
+    };
+  }
+
+  async login(req, res) {
+    const user = await this.authenticate(req.body.username, req.body.password);
+    user
+      ? res.json(this.loginTransform(user))
+      : res.status(422).json({
+          msg: 'Entered information is incorrect',
+          success: false,
+        });
   }
 }
 

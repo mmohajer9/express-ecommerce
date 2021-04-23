@@ -1,8 +1,4 @@
 const { body } = require('express-validator');
-const path = require('path');
-
-const { models: modelsPath } = config.path;
-
 const Validator = require('../base/Validator');
 
 class AuthValidator extends Validator {
@@ -40,7 +36,10 @@ class AuthValidator extends Validator {
         return true;
       }),
     ],
-    login: [],
+    login: [
+      body('username').notEmpty(),
+      body('password').notEmpty()
+    ],
   };
 }
 
