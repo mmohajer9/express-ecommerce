@@ -21,7 +21,6 @@ class UserController extends Controller {
       createdAt: item.createdAt,
       updatedAt: item.updatedAt,
       orders: item.orders,
-      addresses: item.addresses,
     };
   }
 
@@ -37,10 +36,10 @@ class UserController extends Controller {
 
     try {
       const user = await this.models.User.findOne({ username }).populate(
-        isOwner ? 'addresses' : ''
+        isOwner ? 'addresses' : '' , 'postalCode line1'
       );
       user
-        ? res.json(this.transform(user))
+        ? res.json(user)
         : res.status(404).json({
             msg: 'User has not been found',
             success: false,

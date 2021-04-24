@@ -1,4 +1,4 @@
-const { body } = require('express-validator');
+const { body, param } = require('express-validator');
 const Validator = require('../base/Validator');
 
 class AddressValidator extends Validator {
@@ -8,6 +8,12 @@ class AddressValidator extends Validator {
       body('line1').notEmpty().trim().escape(),
       body('line2').optional().trim().escape(),
     ],
+    update: [
+      body('postalCode').optional().isPostalCode('IR').trim().escape(),
+      body('line1').optional().trim().escape(),
+      body('line2').optional().trim().escape(),
+    ],
+    detail: [param('id').notEmpty().isMongoId()],
   };
 
   isOwner(req, res, next) {

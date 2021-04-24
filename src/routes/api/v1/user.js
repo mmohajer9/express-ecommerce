@@ -59,5 +59,26 @@ router
     addressValidator.validationResult,
     addressController.create
   );
+router
+  .route('/:username/addresses/:id')
+  .get(
+    authValidator.isAuthenticatedJWT,
+    addressValidator.validators.detail,
+    addressValidator.validationResult,
+    addressValidator.isOwner,
+    addressController.detail
+  )
+  .put(
+    authValidator.isAuthenticatedJWT,
+    addressValidator.isOwner,
+    addressValidator.validators.update,
+    addressValidator.validationResult,
+    addressController.update
+  )
+  .delete(
+    authValidator.isAuthenticatedJWT,
+    addressValidator.isOwner,
+    addressController.destroy
+  );
 
 module.exports = router;
