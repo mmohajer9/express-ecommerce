@@ -2,6 +2,7 @@ const express = require('express');
 const helmet = require('helmet');
 const compression = require('compression');
 const chalk = require('chalk');
+const morgan = require('morgan');
 
 // Global Config
 global.config = require('./src/common/config');
@@ -20,7 +21,13 @@ app.use(compression());
 // Request Body Middlewares
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json({ type: 'application/json' }));
+
+// Static Files
 app.use('/public', express.static('public'));
+
+// Logging
+app.use(morgan('tiny'));
+
 // URL Prefixes
 app.use('/', webRouter);
 app.use('/api', apiRouter);

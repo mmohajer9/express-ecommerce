@@ -5,6 +5,11 @@ const path = require('path');
 const { api: apiControllerPath } = config.path.controllers.v1;
 const { middlewares: middlewaresPath } = config.path;
 
+const authValidator = require(path.join(
+  apiControllerPath,
+  '/auth/authValidator'
+));
+
 const { imageUpload } = require(path.join(
   middlewaresPath,
   '/uploadMiddleware'
@@ -28,18 +33,31 @@ const userValidator = require(path.join(
   '/user/userValidator'
 ));
 
-router.get('/', userValidator.isAuthenticatedJWT, userController.list);
+router.get('/', authValidator.isAuthenticatedJWT, userController.list);
 router
   .route('/:username')
-  .get(userValidator.isAuthenticatedJWT, userController.detail)
+  .get(authValidator.isAuthenticatedJWT, userController.detail)
   .put(
-    userValidator.isAuthenticatedJWT,
+    authValidator.isAuthenticatedJWT,
     userValidator.isOwner,
     userValidator.validators.update,
     userValidator.validationResult,
     imageUpload.single('profileImage'),
     userController.update
   );
-router.route('/:username/addresses').get().post();
+router
+  .route('/:username/addresses')
+  .get(
+    authValidator.isAuthenticatedJWT,
+    addressValidator.isOwner,
+    addressController.list
+  )
+  .post(
+    authValidator.isAuthenticatedJWT,
+    addressValidator.isOwner,
+    addressValidator.validators.create,
+    addressValidator.validationResult,
+    addressController.create
+  );
 
 module.exports = router;

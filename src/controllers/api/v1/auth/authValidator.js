@@ -1,5 +1,6 @@
 const { body } = require('express-validator');
 const Validator = require('../base/Validator');
+const checkJWT = require('express-jwt');
 
 class AuthValidator extends Validator {
   validators = {
@@ -36,11 +37,21 @@ class AuthValidator extends Validator {
         return true;
       }),
     ],
-    login: [
-      body('username').notEmpty(),
-      body('password').notEmpty()
-    ],
+    login: [body('username').notEmpty(), body('password').notEmpty()],
   };
+
+  // * JWT Protected Middleware
+  isAuthenticatedJWT = [
+    checkJWT({
+      secret: config.secret,
+      algorithms: ['HS256'],
+    }),
+    (err, req, res, next) => {
+      if (err.name === 'UnauthorizedError') {
+        res.status(401).json(err);
+      }
+    },
+  ];
 }
 
 module.exports = new AuthValidator();

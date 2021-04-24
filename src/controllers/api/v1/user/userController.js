@@ -33,13 +33,17 @@ class UserController extends Controller {
 
   async detail(req, res) {
     const { username } = req.params;
-    const user = await this.models.User.findOne({ username });
-    user
-      ? res.json(this.transform(user))
-      : res.status(404).json({
-          msg: 'User has not been found',
-          success: false,
-        });
+    try {
+      const user = await this.models.User.findOne({ username });
+      user
+        ? res.json(this.transform(user))
+        : res.status(404).json({
+            msg: 'User has not been found',
+            success: false,
+          });
+    } catch (error) {
+      res.status(422).json(error);
+    }
   }
 
   async update(req, res) {
@@ -53,17 +57,21 @@ class UserController extends Controller {
       ? { ...req.body, profileImage }
       : { ...req.body };
 
-    const user = await this.models.User.findOneAndUpdate(
-      { username },
-      payload,
-      { new: true }
-    );
-    user
-      ? res.json(this.transform(user))
-      : res.status(404).json({
-          msg: 'User has not been found',
-          success: false,
-        });
+    try {
+      const user = await this.models.User.findOneAndUpdate(
+        { username },
+        payload,
+        { new: true }
+      );
+      user
+        ? res.json(this.transform(user))
+        : res.status(404).json({
+            msg: 'User has not been found',
+            success: false,
+          });
+    } catch (error) {
+      res.status(422).json(error);
+    }
   }
 
   version(req, res) {
