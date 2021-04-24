@@ -33,8 +33,12 @@ class UserController extends Controller {
 
   async detail(req, res) {
     const { username } = req.params;
+    const isOwner = req.user.username === username;
+
     try {
-      const user = await this.models.User.findOne({ username });
+      const user = await this.models.User.findOne({ username }).populate(
+        isOwner ? 'addresses' : ''
+      );
       user
         ? res.json(this.transform(user))
         : res.status(404).json({
