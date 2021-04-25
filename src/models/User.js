@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 // Schema Creator Class
 const Schema = mongoose.Schema;
@@ -49,5 +50,8 @@ userSchema.pre('save', function (next) {
     });
   }
 });
+
+// Adding Pagination
+userSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('User', userSchema);

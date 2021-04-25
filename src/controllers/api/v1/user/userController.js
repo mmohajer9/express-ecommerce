@@ -25,9 +25,15 @@ class UserController extends Controller {
   }
 
   async list(req, res) {
-    const users = await this.models.User.find();
-
-    res.status(200).json(this.transformCollection(users));
+    try {
+      const page = req.query.page || 1;
+      const users = await this.models.User.paginate({}, { page, limit: 10 });
+      res
+        .status(200)
+        .json({ ...users, docs: this.transformCollection(users.docs) });
+    } catch (error) {
+      res.status(422).json(error);
+    }
   }
 
   async detail(req, res) {
@@ -36,7 +42,8 @@ class UserController extends Controller {
 
     try {
       const user = await this.models.User.findOne({ username }).populate(
-        isOwner ? 'addresses' : '' , 'postalCode line1'
+        isOwner ? 'addresses' : '',
+        'postalCode line1'
       );
       user
         ? res.json(user)

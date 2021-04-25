@@ -38,12 +38,11 @@ class AuthController extends Controller {
     try {
       const user = await this.models.User.findOne({
         username: username,
-      });
+      }).orFail();
       const same = await bcrypt.compare(password, user.password);
-
       return same ? user : null;
     } catch (error) {
-      return error;
+      return null;
     }
   }
 
