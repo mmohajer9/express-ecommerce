@@ -2,9 +2,9 @@
   "name": "express-ecommerce",
   "version": "1.0.0",
   "description": "e-commerce platform with node/express.js",
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
-    "start": "clear;nodemon server.js"
+    "start": "clear;nodemon src/server.js"
   },
   "author": "",
   "license": "ISC",

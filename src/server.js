@@ -5,11 +5,11 @@ const chalk = require('chalk');
 const morgan = require('morgan');
 
 // Global Config
-global.config = require('./src/common/config');
+global.config = require('./common/config');
 
 // Routers
-const webRouter = require('./src/routes/web');
-const apiRouter = require('./src/routes/api');
+const webRouter = require('./routes/web');
+const apiRouter = require('./routes/api');
 
 // Express Application Instance
 const app = express();
