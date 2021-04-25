@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 const mongoosePaginate = require('mongoose-paginate-v2');
 
 // Schema Creator Class
@@ -41,15 +40,6 @@ const userSchema = new Schema(
 
 // Creating The Model and Collection -> Also Export
 // By default , collection name is the name of the model + 's' -> users in here
-
-userSchema.pre('save', function (next) {
-  if (this.password) {
-    bcrypt.hash(this.password, 10, (err, hash) => {
-      this.password = hash;
-      next();
-    });
-  }
-});
 
 // Adding Pagination
 userSchema.plugin(mongoosePaginate);

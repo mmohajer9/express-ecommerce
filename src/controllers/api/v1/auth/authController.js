@@ -12,17 +12,20 @@ class AuthController extends Controller {
     User,
   };
 
-  register(req, res) {
+  async register(req, res) {
     // Actions
+
+    const hash = await bcrypt.hash(req.body.password, 10);
+
     const user = new this.models.User({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       username: req.body.username,
       email: req.body.email,
-      password: req.body.password,
+      password: hash,
     });
 
-    user.save((err, user) => {
+    await user.save((err, user) => {
       if (err) {
         res.status(406).json(err);
       } else {

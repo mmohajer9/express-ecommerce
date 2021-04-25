@@ -2,6 +2,10 @@ const { body } = require('express-validator');
 const Validator = require('../base/Validator');
 const checkJWT = require('express-jwt');
 
+const path = require('path');
+const { models: modelsPath } = config.path;
+const User = require(path.join(modelsPath, '/User'));
+
 class AuthValidator extends Validator {
   validators = {
     register: [
@@ -50,6 +54,15 @@ class AuthValidator extends Validator {
       if (err.name === 'UnauthorizedError') {
         res.status(401).json(err);
       }
+    },
+    async (req, res, next) => {
+      const user = await User.findOne({ _id: req.user._id });
+      user
+        ? next()
+        : res.status(401).json({
+            msg: 'Token is valid but the user is not found',
+            success: false,
+          });
     },
   ];
 }

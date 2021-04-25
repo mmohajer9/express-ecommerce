@@ -24,14 +24,14 @@ class AddressController extends Controller {
 
   async create(req, res) {
     try {
+      const user = await this.models.User.findOne({ _id: req.user._id }).orFail();
+
       const address = await this.models.Address.create({
         user: req.user._id,
         line1: req.body.line1,
         line2: req.body.line2,
         postalCode: req.body.postalCode,
       });
-
-      const user = await this.models.User.findOne({ _id: req.user._id });
 
       user.addresses.push(address._id);
       const updatedUser = await user.save();
