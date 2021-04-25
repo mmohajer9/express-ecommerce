@@ -35,7 +35,7 @@ app.use('/api', apiRouter);
 // Event-Loop
 app.listen(config.port, config.hostname, () => {
   console.log(
-    chalk.blueBright(
+    chalk.cyanBright(
       `Server is running at ${config.scheme}${config.hostname}:${config.port}`
     )
   );

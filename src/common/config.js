@@ -17,7 +17,7 @@ conn.on('error', () =>
   console.error(chalk.redBright('Mongoose : Connection refused'))
 );
 conn.once('open', () =>
-  console.log(chalk.greenBright('Mongoose : Connected to the database'))
+  console.log(chalk.blueBright('Mongoose : Connected to the database'))
 );
 
 // Global Export
